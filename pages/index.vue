@@ -19,8 +19,16 @@
       </template>
     </navigation>
     <!-- /navigation -->
+
+
   </div>
 </template>
 
 <script setup lang="ts">
+const fetchPokemons = async () => {
+  const response = await GqlPokemons({limit: 5, offset: 0});
+}
+onMounted(() => {
+  fetchPokemons();
+});
 </script>
