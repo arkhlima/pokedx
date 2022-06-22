@@ -12,6 +12,18 @@
     </header>
     <!-- /card-header -->
 
+    <!-- card-figure -->
+    <figure class="card__figure [ w-full h-[150px] mx-auto flex justify-center items-center z-[2] relative">
+      <img
+        :src="card.img"
+        :alt="card.name"
+        width="140"
+        height="140"
+        class="card__img [ transition-all w-[140px] h-[140px] object-contain grayscale-[25%] ]"
+      />
+    </figure>
+    <!-- /card-figure -->
+
     <!-- card-content -->
     <div class="card__content [ flex justify-center items-center p-2 z-[3] ]">
       <h2 class="card__label [ text-lg text-center font-bold ]">

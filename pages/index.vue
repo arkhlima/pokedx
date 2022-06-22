@@ -33,6 +33,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 
+import { POKEMON_IMG_BASE_URL } from '~/utils/constants';
+
 let species = ref([])
 let totalSpecies = ref<number>();
 
@@ -45,12 +47,20 @@ const pagination = reactive({
   offset: 0,
 });
 
+const composeSpecies = (species) => {
+  return species.map(specy => ({
+    id: specy.id,
+    name: specy.name,
+    img: `${POKEMON_IMG_BASE_URL}${specy.id}.png`,
+    pokemons: specy.pokemons,
+  }));
+};
 
-const fetchPokemons = async () => {
+const fetchPokedex = async () => {
   try {
     state.fetching = true;
-    const response = await GqlPokemons(pagination);
-    species.value = response?.species;
+    const response = await GqlPokedex(pagination);
+    species.value = composeSpecies(response?.species);
     totalSpecies.value = response?.species_aggregate?.aggregate?.count;
   } catch (error) {
     state.error = error;
@@ -60,6 +70,6 @@ const fetchPokemons = async () => {
 };
 
 onMounted(() => {
-  fetchPokemons();
+  fetchPokedex();
 });
 </script>

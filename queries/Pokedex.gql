@@ -1,4 +1,4 @@
-query Pokemons($limit: Int, $offset: Int) {
+query Pokedex($limit: Int, $offset: Int) {
   species: pokemon_v2_pokemonspecies(limit: $limit, offset: $offset, order_by: {
     id: asc
   }) {
