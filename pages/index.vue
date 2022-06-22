@@ -20,14 +20,45 @@
     </navigation>
     <!-- /navigation -->
 
-
+    <!-- main -->
+    <main>
+      <!-- card-list -->
+      <card-list :cards="species" />
+      <!-- /card-list -->
+    </main>
+    <!-- /main -->
   </div>
 </template>
 
 <script setup lang="ts">
+import { reactive, ref } from 'vue';
+
+let species = ref([])
+let totalSpecies = ref<number>();
+
+const state = reactive({
+  fetching: false,
+  error: false,
+});
+const pagination = reactive({
+  limit: 12,
+  offset: 0,
+});
+
+
 const fetchPokemons = async () => {
-  const response = await GqlPokemons({limit: 5, offset: 0});
-}
+  try {
+    state.fetching = true;
+    const response = await GqlPokemons(pagination);
+    species.value = response?.species;
+    totalSpecies.value = response?.species_aggregate?.aggregate?.count;
+  } catch (error) {
+    state.error = error;
+  } finally {
+    state.fetching = false;
+  }
+};
+
 onMounted(() => {
   fetchPokemons();
 });
