@@ -1,62 +1,69 @@
 <template>
-  <article
-    class="card [ bg-[#f8f8f8] flex relative flex-col rounded-md border-[3px] border-[#f8f8f8] shadow-md cursor-pointer transition-all hover:scale-105 hover:shadow-lg hover:bg-[linear-gradient(#f8f8f8, #f8f8f8) padding-box, linear-gradient(135deg, #f8f8f8, #f8f8f8, #1d4ed8, #c026d3) border-box] ]"
-    @mouseup="handleCardMouseUp"
-    @mousedown="handleCardMouseDown"
-  >
-    <!-- card-header -->
-    <header class="card__header [ absolute top-0 left-0 w-full py-[0.3rem] px-1.5 ]">
-      <small class="card__id [ text-xs leading-none font-bold ]">
-        {{ card.id }}
-      </small>
-    </header>
-    <!-- /card-header -->
+	<article
+		class="flex relative flex-col bg-[#f8f8f8] rounded-md border-[3px] border-[#f8f8f8] shadow-md hover:shadow-lg transition-all hover:scale-105 cursor-pointer card [ hover:bg-[linear-gradient(#f8f8f8, #f8f8f8) padding-box, linear-gradient(135deg, #f8f8f8, #1d4ed8, #c026d3) border-box] ]"
+		@mouseup="handleCardMouseUp"
+		@mousedown="handleCardMouseDown"
+	>
+		<!-- card-header -->
+		<header
+			class="absolute top-0 left-0 py-[0.3rem] px-1.5 w-full card__header"
+		>
+			<small class="text-xs font-bold leading-none card__id">
+				{{ card.id }}
+			</small>
+		</header>
+		<!-- /card-header -->
 
-    <!-- card-figure -->
-    <figure class="card__figure [ w-full h-[150px] mx-auto flex justify-center items-center z-[2] relative">
-      <img
-        :src="card.img"
-        :alt="card.name"
-        width="140"
-        height="140"
-        class="card__img [ transition-all w-[140px] h-[140px] object-contain grayscale-[25%] ]"
-      />
-    </figure>
-    <!-- /card-figure -->
+		<!-- card-figure -->
+		<figure
+			class="flex relative z-[2] justify-center items-center mx-auto w-full h-[150px] card__figure ["
+		>
+			<img
+				:src="card.img"
+				:alt="card.name"
+				width="140"
+				height="140"
+				class="object-contain w-[140px] h-[140px] grayscale-[25%] transition-all card__img"
+			/>
+		</figure>
+		<!-- /card-figure -->
 
-    <!-- card-content -->
-    <div class="card__content [ flex justify-center items-center p-2 z-[3] ]">
-      <h2 class="card__label [ text-lg text-center font-bold ]">
-        <nuxt-link :to="`/${card.name}`" class="card__link [ focus:border-b-[3px] focus:border-b-gray-300 focus:outline-none ]">
-          {{ card.name }}
-        </nuxt-link>
-      </h2>
-    </div>
-    <!-- /card-content -->
-  </article>
+		<!-- card-content -->
+		<div class="flex z-[3] justify-center items-center p-2 card__content">
+			<h2 class="text-lg font-bold text-center card__label">
+				<nuxt-link
+					:to="`/${card.name}`"
+					class="focus:border-b-[3px] focus:border-b-gray-300 focus:outline-none card__link"
+				>
+					{{ card.name }}
+				</nuxt-link>
+			</h2>
+		</div>
+		<!-- /card-content -->
+	</article>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-import { ComposedSpecies } from '~/interfaces/interfaces';
+import { ComposedSpecies } from '~/interfaces/interfaces'
 
-interface Props{
-  card: ComposedSpecies,
-};
-const { card } = defineProps<Props>();
+interface Props {
+	card: ComposedSpecies
+}
+const props = defineProps<Props>()
 
-const router = useRouter();
+const router = useRouter()
 
-let mouseUp = ref();
-let mouseDown = ref();
+const mouseUp = ref()
+const mouseDown = ref()
 
 const handleCardMouseUp = () => {
-  mouseUp.value = +new Date();
-  if ((mouseUp.value - mouseDown.value) < 200) router.push(`/${card.name}`);
-};
+	mouseUp.value = +new Date()
+	if (mouseUp.value - mouseDown.value < 200) router.push(`/${props.card.name}`)
+}
 
 const handleCardMouseDown = () => {
-  mouseDown.value = +new Date();
-};
+	mouseDown.value = +new Date()
+}
 </script>

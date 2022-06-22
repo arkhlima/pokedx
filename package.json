@@ -7,8 +7,7 @@
     "preview": "nuxt preview",
     "test": "vitest --run --reporter verbose --globals",
     "test:watch": "vitest --reporter verbose --globals",
-    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "yarn lint:js",
+    "lint": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -18,18 +17,19 @@
     ]
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@nuxtjs/tailwindcss": "^5.1.2",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^3.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-tailwindcss": "^3.5.2",
-    "eslint-plugin-vue": "^9.1.1",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.2",
     "nuxt": "3.0.0-rc.4",
     "prettier": "^2.7.1",
     "sass": "^1.52.3",
+    "typescript": "^4.7.4",
     "vitest": "^0.15.2"
   },
   "dependencies": {
