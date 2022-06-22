@@ -33,10 +33,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 
+import { Pokedex, ComposedPokedex, Species, Pokemons, Types, Aggregate } from '~/interfaces/interfaces';
 import { POKEMON_IMG_BASE_URL } from '~/utils/constants';
 import padNumber from '~/utils/padNumber';
 
-let species = ref([]);
+let species = ref([] as ComposedPokedex['species']);
 let totalSpecies = ref<number>();
 
 const state = reactive({
@@ -48,8 +49,8 @@ const pagination = reactive({
   offset: 0,
 });
 
-const composeSpecies = (species) => {
-  return species.map(specy => ({
+const composeSpecies = (species: Pokedex['species']) => {
+  return species.map((specy: Species) => ({
     id: padNumber(specy.id),
     name: specy.name,
     img: `${POKEMON_IMG_BASE_URL}${specy.id}.png`,
@@ -60,10 +61,10 @@ const composeSpecies = (species) => {
 const fetchPokedex = async () => {
   try {
     state.fetching = true;
-    const response = await GqlPokedex(pagination);
-    species.value = composeSpecies(response?.species);
+    const response = await GqlPokedex(pagination) as Pokedex;
+    species.value.push(...composeSpecies(response?.species));
     totalSpecies.value = response?.species_aggregate?.aggregate?.count;
-  } catch (error) {
+  } catch (error: any) {
     state.error = error;
   } finally {
     state.fetching = false;
