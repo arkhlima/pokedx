@@ -10,6 +10,17 @@ export default defineNuxtConfig({
   css: ['~/assets/styles.scss'],
   modules: [
     // https://tailwindcss.nuxtjs.org/
-    '@nuxtjs/tailwindcss'
-  ]
+    '@nuxtjs/tailwindcss',
+    // https://nuxt-graphql-client.web.app/
+    'nuxt-graphql-client'
+  ],
+  runtimeConfig: {
+    public: {
+      'graphql-client': {
+        clients: {
+          default: 'https://beta.pokeapi.co/graphql/v1beta',
+        }
+      }
+    },
+  },
 })
