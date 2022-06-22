@@ -23,7 +23,10 @@
     <!-- main -->
     <main>
       <!-- card-list -->
-      <card-list :cards="species" />
+      <card-list
+        :cards="species"
+        :total="totalSpecies"
+      />
       <!-- /card-list -->
     </main>
     <!-- /main -->
@@ -33,12 +36,12 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 
-import { Pokedex, ComposedPokedex, Species, Pokemons, Types, Aggregate } from '~/interfaces/interfaces';
+import { Pokedex, ComposedPokedex, Species } from '~/interfaces/interfaces';
 import { POKEMON_IMG_BASE_URL } from '~/utils/constants';
 import padNumber from '~/utils/padNumber';
 
 let species = ref([] as ComposedPokedex['species']);
-let totalSpecies = ref<number>();
+let totalSpecies = ref<number>(0);
 
 const state = reactive({
   fetching: false,

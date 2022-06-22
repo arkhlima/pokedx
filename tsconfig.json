@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "alwaysStrict": true,
+    "noImplicitThis": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
   },

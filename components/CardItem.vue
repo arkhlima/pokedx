@@ -39,8 +39,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+import { ComposedSpecies } from '~/interfaces/interfaces';
+
 interface Props{
-  card,
+  card: ComposedSpecies,
 };
 const { card } = defineProps<Props>();
 
