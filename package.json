@@ -12,8 +12,7 @@
   },
   "lint-staged": {
     "**/*.{js,ts,vue}": [
-      "yarn test",
-      "yarn lint"
+      "yarn lint --fix"
     ]
   },
   "devDependencies": {
@@ -33,6 +32,7 @@
     "vitest": "^0.15.2"
   },
   "dependencies": {
-    "nuxt-graphql-client": "^0.0.33"
+    "nuxt-graphql-client": "^0.0.33",
+    "vue-infinite-loading": "3.0.0-alpha.0-0"
   }
 }

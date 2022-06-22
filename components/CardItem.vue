@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { ComposedSpecies } from '~/interfaces/interfaces'
+import { ComposedSpecies } from '~/models/interfaces'
 
 interface Props {
 	card: ComposedSpecies

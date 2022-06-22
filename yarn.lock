@@ -7900,6 +7900,11 @@ through@^2.3.6, through@^2.3.8:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
 
+tiny-emitter@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
+  integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
+
 tiny-invariant@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.2.0.tgz#a1141f86b672a9148c72e978a19a73b9b94a15a9"
@@ -8389,6 +8394,13 @@ vue-eslint-parser@^8.0.1, vue-eslint-parser@^8.3.0:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^7.3.5"
+
+vue-infinite-loading@3.0.0-alpha.0-0:
+  version "3.0.0-alpha.0-0"
+  resolved "https://registry.yarnpkg.com/vue-infinite-loading/-/vue-infinite-loading-3.0.0-alpha.0-0.tgz#6b6bcb45dc8e2a61752209a877ace316f9d613db"
+  integrity sha512-k51cQtes3hyF3D28Hi1hk1zDmgiJ8EakNnccb9xqHc4MGDKeHizzdrFV+eP70qYFJjRqo2LJ3Ovs+X8/kGNsbA==
+  dependencies:
+    tiny-emitter "^2.1.0"
 
 vue-router@^4.0.16:
   version "4.0.16"
