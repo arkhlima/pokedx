@@ -34,8 +34,9 @@
 import { reactive, ref } from 'vue';
 
 import { POKEMON_IMG_BASE_URL } from '~/utils/constants';
+import padNumber from '~/utils/padNumber';
 
-let species = ref([])
+let species = ref([]);
 let totalSpecies = ref<number>();
 
 const state = reactive({
@@ -49,7 +50,7 @@ const pagination = reactive({
 
 const composeSpecies = (species) => {
   return species.map(specy => ({
-    id: specy.id,
+    id: padNumber(specy.id),
     name: specy.name,
     img: `${POKEMON_IMG_BASE_URL}${specy.id}.png`,
     pokemons: specy.pokemons,
