@@ -1,6 +1,6 @@
 <template>
 	<article
-		class="flex relative flex-col bg-[#f8f8f8] rounded-md border-[3px] border-[#f8f8f8] shadow-md hover:shadow-lg transition-all hover:scale-105 cursor-pointer card [ hover:bg-[linear-gradient(#f8f8f8, #f8f8f8) padding-box, linear-gradient(135deg, #f8f8f8, #1d4ed8, #c026d3) border-box] ]"
+		class="flex relative flex-col bg-neutral-50 rounded-md border-[3px] border-neutral-50 shadow-md hover:shadow-lg transition-all hover:scale-105 cursor-pointer card [ hover:bg-[linear-gradient(#f8f8f8, #f8f8f8) padding-box, linear-gradient(135deg, #f8f8f8, #1d4ed8, #c026d3) border-box] ]"
 		@mouseup="handleCardMouseUp"
 		@mousedown="handleCardMouseDown"
 	>
@@ -8,7 +8,9 @@
 		<header
 			class="absolute top-0 left-0 py-[0.3rem] px-1.5 w-full card__header"
 		>
-			<small class="text-xs font-bold leading-none card__id">
+			<small
+				class="text-xs font-semibold leading-none text-neutral-400 card__id"
+			>
 				{{ card.id }}
 			</small>
 		</header>
@@ -30,7 +32,7 @@
 
 		<!-- card-content -->
 		<div class="flex z-[3] justify-center items-center p-2 card__content">
-			<h2 class="text-lg font-bold text-center card__label">
+			<h2 class="text-lg font-semibold text-center card__label">
 				<nuxt-link
 					:to="`/${card.name}`"
 					class="focus:border-b-[3px] focus:border-b-gray-300 focus:outline-none card__link"

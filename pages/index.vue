@@ -3,10 +3,17 @@
 		<!-- navigation -->
 		<navigation>
 			<template #left>
-				<h1 class="text-xl font-bold text-[#f8f8f8]">pokédx</h1>
+				<h1 class="text-xl font-bold text-neutral-50">
+					<nuxt-link
+						to="/"
+						class="py-0.5 px-2 rounded-md focus:outline-none focus:ring focus:ring-gray-300"
+					>
+						pokédx
+					</nuxt-link>
+				</h1>
 			</template>
 			<template #right>
-				<btn class="text-[#f8f8f8]">
+				<btn class="text-neutral-50">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="mr-2 w-5 h-5"
