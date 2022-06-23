@@ -17,22 +17,33 @@ export interface Aggregate {
 export interface Species {
 	id: number
 	name: string
-	pokemons: [Pokemons]
+	pokemons: Pokemons[]
 }
 
 export interface ComposedSpecies {
 	id: string
 	name: string
 	img: string
-	pokemons: [Pokemons]
+	pokemons: ComposedPokemons[]
 }
 
 export interface Pokemons {
 	types: Types[]
 }
 
+export interface ComposedPokemons {
+	types: ComposedTypes[]
+}
+
 export interface Types {
 	type: {
 		name: string
+	}
+}
+
+export interface ComposedTypes {
+	type: {
+		name: string
+		color: string
 	}
 }

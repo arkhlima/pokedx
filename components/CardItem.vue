@@ -1,24 +1,35 @@
 <template>
 	<article
-		class="flex relative flex-col bg-neutral-50 rounded-md border-[3px] border-neutral-50 shadow-md hover:shadow-lg transition-all hover:scale-105 cursor-pointer card [ hover:bg-[linear-gradient(#f8f8f8, #f8f8f8) padding-box, linear-gradient(135deg, #f8f8f8, #1d4ed8, #c026d3) border-box] ]"
+		class="flex relative flex-col bg-neutral-50 rounded-md border-[3px] border-neutral-50 shadow-md hover:shadow-lg transition-all hover:scale-105 cursor-pointer card"
 		@mouseup="handleCardMouseUp"
 		@mousedown="handleCardMouseDown"
 	>
 		<!-- card-header -->
 		<header
-			class="absolute top-0 left-0 py-[0.3rem] px-1.5 w-full card__header"
+			class="grid absolute top-0 left-0 grid-cols-2 items-center py-[0.3rem] px-1.5 w-full card__header"
 		>
 			<small
 				class="text-xs font-semibold leading-none text-neutral-400 card__id"
 			>
 				{{ card.id }}
 			</small>
+			<div
+				v-if="card?.pokemons[0]?.types?.length > 0"
+				class="flex gap-x-1 justify-end items-center card__badges"
+			>
+				<div
+					v-for="(type, i) of card.pokemons[0].types"
+					:key="i"
+					:class="type?.type?.color"
+					class="w-[10px] h-[10px] rounded-full card__badge [ ]"
+				/>
+			</div>
 		</header>
 		<!-- /card-header -->
 
 		<!-- card-figure -->
 		<figure
-			class="flex relative z-[2] justify-center items-center mx-auto w-full h-[150px] card__figure ["
+			class="flex relative z-[2] justify-center items-center mx-auto w-full h-[150px] card__figure"
 		>
 			<img
 				:src="card.img"
@@ -69,3 +80,14 @@ const handleCardMouseDown = () => {
 	mouseDown.value = +new Date()
 }
 </script>
+
+<style lang="scss" scoped>
+.card {
+	&:hover {
+		.card__img {
+			transform: scale(1.1);
+			filter: grayscale(0) drop-shadow(0 0 5px rgb(18 18 18 / 20%));
+		}
+	}
+}
+</style>

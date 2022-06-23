@@ -13,7 +13,7 @@
 				</h1>
 			</template>
 			<template #right>
-				<btn class="text-neutral-50">
+				<btn class="text-neutral-50" @click="handleFilterModalVisibility">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="mr-2 w-5 h-5"
@@ -41,7 +41,10 @@
 			<!-- /card-list -->
 
 			<!-- infinite-loading -->
-			<infinite-loading v-if="species.length" @infinite="infiniteScrollPokedex">
+			<infinite-loading
+				v-if="species.length"
+				@infinite="handleInfiniteScrollPokedex"
+			>
 				<template #spinner>
 					<svg
 						class="mx-auto mb-8 w-5 h-5 animate-spin"
@@ -66,6 +69,10 @@
 				</template>
 			</infinite-loading>
 			<!-- infinite-loading -->
+
+			<modal :is-shown="isFilterModalShown" @click="handleFilterModalVisibility"
+				>asasa</modal
+			>
 		</main>
 		<!-- /main -->
 	</div>
@@ -76,13 +83,20 @@ import { reactive, ref } from 'vue'
 
 import InfiniteLoading from 'vue-infinite-loading'
 
-import { Pokedex, ComposedPokedex, Species } from '~/models/interfaces'
-import { POKEMON_IMG_BASE_URL } from '~/utils/constants'
-import padNumber from '~/utils/padNumber'
+import {
+	Pokedex,
+	ComposedPokedex,
+	Species,
+	Pokemons,
+	Types,
+} from '~/models/interfaces'
+import { POKEMON_IMG_BASE_URL, POKEMON_TYPE_COLOR } from '~/utils/constants'
+import padNumber from '~/utils/pad-number'
 
 const species = ref([] as ComposedPokedex['species'])
 const totalSpecies = ref<number>(0)
 const currentPage = ref<number>(1)
+const isFilterModalShown = ref<boolean>(false)
 
 const state = reactive({
 	fetching: false,
@@ -98,7 +112,14 @@ const composeSpecies = (species: Pokedex['species']) => {
 		id: padNumber(specy.id),
 		name: specy.name,
 		img: `${POKEMON_IMG_BASE_URL}${specy.id}.png`,
-		pokemons: specy.pokemons,
+		pokemons: specy.pokemons.map((pokemons: Pokemons) => ({
+			types: pokemons.types.map((pokemonsTypes: Types) => ({
+				type: {
+					name: pokemonsTypes.type.name,
+					color: POKEMON_TYPE_COLOR[pokemonsTypes.type.name],
+				},
+			})),
+		})),
 	}))
 }
 
@@ -106,7 +127,7 @@ const fetchPokedex = async () => {
 	try {
 		state.fetching = true
 		const response = (await GqlPokedex(pagination)) as Pokedex
-		species.value.push(...composeSpecies(response?.species))
+		species.value = composeSpecies(response?.species)
 		totalSpecies.value = response?.species_aggregate?.aggregate?.count
 	} catch (error: any) {
 		state.error = error
@@ -115,7 +136,7 @@ const fetchPokedex = async () => {
 	}
 }
 
-const infiniteScrollPokedex = async ($state: {
+const handleInfiniteScrollPokedex = async ($state: {
 	loaded: () => void
 	complete: () => void
 }) => {
@@ -140,6 +161,10 @@ const infiniteScrollPokedex = async ($state: {
 	} finally {
 		state.fetching = false
 	}
+}
+
+const handleFilterModalVisibility = () => {
+	isFilterModalShown.value = !isFilterModalShown.value
 }
 
 onMounted(() => {
