@@ -1,0 +1,33 @@
+query PokedexFilter($limit: Int, $offset: Int, $types: [String!]) {
+  species: pokemon_v2_pokemonspecies(limit: $limit, offset: $offset, order_by: {
+      id: asc
+    } where: {  }
+  ) {
+    id
+    name
+    pokemons: pokemon_v2_pokemons {
+      types: pokemon_v2_pokemontypes {
+        type: pokemon_v2_type {
+          name
+        }
+      }
+    }
+  }
+  species_aggregate: pokemon_v2_pokemonspecies_aggregate(
+    where: {
+      pokemon_v2_pokemons: {
+        pokemon_v2_pokemontypes: {
+          pokemon_v2_type: {
+            name: {
+              _in: $types
+            }
+          }
+        }
+      }
+    }
+  ) {
+    aggregate {
+      count
+    }
+  }
+}

@@ -48,10 +48,13 @@ export interface ComposedTypes {
 	}
 }
 
+export interface Pokemon {
+	species: PokemonDetail[]
+}
 export interface PokemonDetail {
 	pokemon: SpeciesDetail[]
 	description: SpeciesDescription[]
-	evolutions: SpeciesEvolutions
+	// evolutions: SpeciesEvolutions
 }
 
 export interface SpeciesDetail {
@@ -74,11 +77,11 @@ export interface SpeciesDescription {
 	text: string
 }
 
-export interface SpeciesEvolutions {
-	species: {
-		name: string
-	}
-}
+// export interface SpeciesEvolutions {
+// 	species: {
+// 		name: string
+// 	}
+// }
 
 export interface SpeciesStats {
 	base_stat: number

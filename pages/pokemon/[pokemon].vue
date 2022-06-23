@@ -150,7 +150,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 
-import { PokemonDetail } from '~/models/interfaces'
+import { PokemonDetail, Pokemon } from '~/models/interfaces'
 
 import { POKEMON_IMG_BASE_URL, POKEMON_TYPE_COLOR } from '~/utils/constants'
 import padNumber from '~/utils/pad-number'
@@ -191,9 +191,9 @@ const pokemonWeight = computed(() => {
 const pokemonHeight = computed(() => {
 	return `${response.value[0]?.pokemon[0]?.height * 10}cm`
 })
-const pokemonEvolutions = computed(() => {
-	return response.value[0]?.evolutions?.species
-})
+// const pokemonEvolutions = computed(() => {
+// 	return response.value[0]?.evolutions?.species
+// })
 const pokemonImg = computed(() => {
 	return `${POKEMON_IMG_BASE_URL}${pokemonId.value}.png`
 })
@@ -201,9 +201,9 @@ const pokemonImg = computed(() => {
 const fetchPokemon = async () => {
 	try {
 		state.fetching = true
-		const { species } = await GqlPokemon({
-			name: route.params.pokemon,
-		})
+		const { species } = (await GqlPokemon({
+			name: route.params.pokemon as string,
+		})) as Pokemon
 		response.value = species
 	} catch (error: any) {
 		state.error = error
