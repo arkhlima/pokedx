@@ -59,7 +59,6 @@
 				<img
 					:src="card.img"
 					:alt="card.name"
-					loading="lazy"
 					width="140"
 					height="140"
 					class="object-contain w-[140px] h-[140px] grayscale-[25%] transition-all card__img"
