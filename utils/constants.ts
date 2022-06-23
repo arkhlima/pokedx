@@ -1,4 +1,4 @@
-export const POKEMON_IMG_BASE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/`
+export const POKEMON_IMG_BASE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/`
 
 export const POKEMON_TYPE_COLOR: Record<string, string> = {
 	normal: 'bg-stone-500',
