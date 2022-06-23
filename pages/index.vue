@@ -97,7 +97,7 @@
 						</btn>
 					</header>
 					<form class="mt-4">
-						<h3 class="font-bold">type:</h3>
+						<h3 class="font-semibold text-neutral-400">by type:</h3>
 						<fieldset class="flex flex-wrap gap-2 mt-2">
 							<checkbox
 								v-for="(value, key, i) in POKEMON_TYPE_COLOR"
@@ -109,7 +109,7 @@
 							/>
 						</fieldset>
 						<btn
-							class="justify-center py-3 mt-4 w-full font-bold text-neutral-50 bg-neutral-900"
+							class="justify-center py-3 mt-8 w-full font-bold text-neutral-50 bg-neutral-900"
 							@click="handleFilterApply"
 						>
 							apply

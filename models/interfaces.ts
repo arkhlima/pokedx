@@ -47,3 +47,42 @@ export interface ComposedTypes {
 		color: string
 	}
 }
+
+export interface PokemonDetail {
+	pokemon: SpeciesDetail[]
+	description: SpeciesDescription[]
+	evolutions: SpeciesEvolutions
+}
+
+export interface SpeciesDetail {
+	id: number
+	name: string
+	height: number
+	weight: number
+	abilities: SpeciesAbilities[]
+	stats: SpeciesStats[]
+	types: Types[]
+}
+
+export interface SpeciesAbilities {
+	ability: {
+		name: string
+	}
+}
+
+export interface SpeciesDescription {
+	text: string
+}
+
+export interface SpeciesEvolutions {
+	species: {
+		name: string
+	}
+}
+
+export interface SpeciesStats {
+	base_stat: number
+	stat: {
+		name: string
+	}
+}
