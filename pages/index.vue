@@ -13,7 +13,11 @@
 				</h1>
 			</template>
 			<template #right>
-				<btn class="text-neutral-50" @click="handleFilterModalVisibility">
+				<btn
+					:class="{ 'ring focus:ring-gray-300': isFiltered }"
+					class="text-neutral-50"
+					@click="handleFilterModalVisibility"
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="w-6 h-6"
@@ -57,7 +61,7 @@
 		<main>
 			<!-- card-list -->
 			<div class="py-8 px-6">
-				<h3 class="font-semibold text-right">total: {{ totalSpecies }}</h3>
+				<h3 class="font-semibold text-right">{{ totalSpecies }} catched</h3>
 				<ul
 					class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 mt-4 card-list"
 				>

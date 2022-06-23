@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="comparison.length > 0"
-		class="grid fixed inset-x-0 bottom-[16px] z-[999] grid-cols-3 gap-y-6 p-6 m-auto w-1/2 bg-neutral-50 rounded-md shadow-md comparison"
+		class="grid fixed inset-x-0 bottom-[16px] z-[999] grid-cols-3 gap-y-6 p-6 m-auto w-[80%] bg-neutral-50 rounded-md shadow-md comparison"
 	>
 		<p class="flex justify-center items-center comparison__first-comparator">
 			{{ comparison[0] }}

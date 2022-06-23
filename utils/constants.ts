@@ -19,4 +19,5 @@ export const POKEMON_TYPE_COLOR: Record<string, string> = {
 	dark: 'bg-stone-700',
 	steel: 'bg-slate-700',
 	fairy: 'bg-pink-500',
+	unknown: 'bg-slate-500',
 }
