@@ -82,3 +82,46 @@ export const SITE_HEAD = {
 		],
 	},
 }
+
+export const PWA = {
+	meta: {
+		name: SITE_TITLE,
+		author: SITE_AUTHOR,
+	},
+	manifest: {
+		name: SITE_TITLE,
+		short_name: SITE_TITLE,
+		lang: SITE_LANG,
+		start_url: '/',
+		display: 'standalone',
+	},
+	icon: {
+		source: './static/apple-touch-icon.png',
+	},
+	workbox: {
+		enabled: true,
+		// unfortunately this doesnt work out, the current module doesnt support this config :(
+		runtimeCaching: [
+			{
+				urlPattern: 'https://beta.pokeapi.co/graphql/v1beta',
+				handler: 'NetworkFirst',
+				method: 'POST',
+				strategyOptions: { cacheableResponse: { statuses: [0, 200] } },
+			},
+			{
+				urlPattern:
+					'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/.*',
+				handler: 'NetworkFirst',
+				method: 'GET',
+				strategyOptions: { cacheableResponse: { statuses: [0, 200] } },
+			},
+			{
+				urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
+				strategyOptions: {
+					cacheName: 'font',
+				},
+			},
+		],
+		cachingExtensions: '@/plugins/workbox-sync.js',
+	},
+}

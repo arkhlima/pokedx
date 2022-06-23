@@ -4,6 +4,7 @@ import * as CONFIG from './utils/site-config'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
 	app: CONFIG.SITE_HEAD,
+	pwa: CONFIG.PWA,
 
 	// https://nuxtjs.org/docs/configuration-glossary/configuration-target/
 	target: 'static',
@@ -15,6 +16,9 @@ export default defineNuxtConfig({
 		'@nuxtjs/tailwindcss',
 		// https://nuxt-graphql-client.web.app/
 		'nuxt-graphql-client',
+		// https://github.com/kevinmarrec/nuxt-pwa-module
+		// use this module since the official nuxt pwa module isnt supported on nuxt3
+		'@kevinmarrec/nuxt-pwa',
 	],
 	runtimeConfig: {
 		public: {
