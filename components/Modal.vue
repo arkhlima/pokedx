@@ -2,7 +2,11 @@
 	<transition name="fade">
 		<div
 			v-if="isShown"
-			class="flex fixed inset-0 top-0 left-0 z-10 justify-center items-center backdrop-blur-[2px]"
+			id="dialog"
+			aria-hidden="true"
+			aria-labelledby="dialog-title"
+			aria-describedby="dialog-description"
+			class="flex fixed inset-0 top-0 left-0 z-[999] justify-center items-center backdrop-blur-[2px]"
 		>
 			<div
 				class="absolute top-0 left-0 w-full h-full fade"
@@ -16,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
 	isShown: boolean
 }>()
 defineEmits(['click'])

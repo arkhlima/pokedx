@@ -1,6 +1,6 @@
 <template>
 	<article
-		class="flex relative flex-col bg-neutral-50 rounded-md border-[3px] border-neutral-50 shadow-md hover:shadow-lg transition-all hover:scale-105 cursor-pointer card"
+		class="flex relative flex-col bg-neutral-50 rounded-md shadow-md hover:shadow-lg transition-all hover:scale-105 cursor-pointer card"
 		@mouseup="handleCardMouseUp"
 		@mousedown="handleCardMouseDown"
 	>

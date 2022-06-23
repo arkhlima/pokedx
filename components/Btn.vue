@@ -1,6 +1,6 @@
 <template>
 	<button
-		class="flex items-center py-0.5 px-2 rounded-md focus:outline-none focus:ring focus:ring-gray-300 button"
+		class="flex items-center py-1 px-2 rounded-md focus:outline-none focus:ring focus:ring-gray-300"
 		@click="$emit('click')"
 	>
 		<slot />

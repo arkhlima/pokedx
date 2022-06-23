@@ -18,5 +18,5 @@ interface Props {
 	cards: ComposedSpecies[]
 	total: number
 }
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
