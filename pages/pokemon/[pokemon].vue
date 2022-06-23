@@ -6,7 +6,7 @@
 				<btn class="text-[#f8f8f8]" @click="$router.go(-1)">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="mr-2 w-6 h-6"
+						class="w-6 h-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -15,10 +15,9 @@
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+							d="M10 19l-7-7m0 0l7-7m-7 7h18"
 						/>
 					</svg>
-					<span class="font-bold"> back </span>
 				</btn>
 			</template>
 			<template #center>
@@ -31,10 +30,16 @@
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="w-6 h-6"
-						viewBox="0 0 20 20"
-						fill="currentColor"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
 					>
-						<path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+						/>
 					</svg>
 				</btn>
 			</template>
@@ -57,7 +62,6 @@
 								:alt="pokemonName"
 								width="200"
 								height="200"
-								loading="lazy"
 								class="object-contain w-[200px] h-[200px] transition-all poke__img"
 							/>
 						</figure>
@@ -89,7 +93,7 @@
 						<p>{{ pokemonDescription }}</p>
 
 						<!-- poke-info -->
-						<dl class="grid grid-cols-[150px_1fr] gap-y-2 mt-4 text-sm">
+						<dl class="grid grid-cols-[100px_1fr] gap-y-2 mt-4 text-sm">
 							<dt class="font-semibold text-neutral-400">height</dt>
 							<dd>{{ pokemonHeight }}</dd>
 							<dt class="font-semibold text-neutral-400">weight</dt>
@@ -118,7 +122,7 @@
 										<span class="">{{ pokemonStat.base_stat }}</span>
 									</div>
 									<div
-										class="block relative mt-1 w-full h-[6px] bg-white rounded-lg"
+										class="flex relative mt-1 w-full h-[8px] bg-neutral-200 rounded-lg"
 									>
 										<span
 											class="flex h-[8px] bg-neutral-400 rounded-md"

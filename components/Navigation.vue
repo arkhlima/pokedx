@@ -8,7 +8,7 @@
 		<div class="flex justify-center items-center">
 			<slot name="center" />
 		</div>
-		<div class="flex justify-end items-center">
+		<div class="flex gap-x-2 justify-end items-center">
 			<slot name="right" />
 		</div>
 	</nav>

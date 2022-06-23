@@ -16,7 +16,7 @@
 				<btn class="text-neutral-50" @click="handleFilterModalVisibility">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="mr-2 w-5 h-5"
+						class="w-6 h-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -28,7 +28,26 @@
 							d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
 						/>
 					</svg>
-					<span class="font-bold"> filter </span>
+				</btn>
+				<btn
+					:class="{ 'ring focus:ring-gray-300': isCompared }"
+					class="text-neutral-50"
+					@click="handleCompareMode"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="w-6 h-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+						/>
+					</svg>
 				</btn>
 			</template>
 		</navigation>
@@ -37,7 +56,21 @@
 		<!-- main -->
 		<main>
 			<!-- card-list -->
-			<card-list :cards="species" :total="totalSpecies" />
+			<div class="py-8 px-6">
+				<h3 class="font-semibold text-right">total: {{ totalSpecies }}</h3>
+				<ul
+					class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 mt-4 card-list"
+				>
+					<li v-for="(specy, i) of species" :key="i" class="bg-neutral-50">
+						<card-item
+							:is-compared="isCompared"
+							:is-disabled="selectedPokemonComparison.length >= 2"
+							:card="specy"
+							@input="handleCompareCheckbox"
+						/>
+					</li>
+				</ul>
+			</div>
 			<!-- /card-list -->
 
 			<!-- infinite-loading -->
@@ -47,7 +80,7 @@
 			>
 				<template #spinner>
 					<svg
-						class="mx-auto mb-8 w-5 h-5 animate-spin"
+						class="mx-auto mb-8 w-6 h-6 animate-spin"
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
@@ -70,6 +103,13 @@
 			</infinite-loading>
 			<!-- infinite-loading -->
 
+			<!-- compare-popup -->
+			<compare-popup
+				:comparison="selectedPokemonComparison"
+				@click="handleComparisonSubmit"
+			/>
+			<!-- /compare-popup -->
+
 			<!-- filter-modal -->
 			<modal
 				:is-shown="isFilterModalShown"
@@ -84,7 +124,7 @@
 						<btn @click="handleFilterModalVisibility">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								class="w-5 h-5"
+								class="w-6 h-6"
 								viewBox="0 0 20 20"
 								fill="currentColor"
 							>
@@ -136,6 +176,8 @@ import {
 } from '~/models/interfaces'
 import { POKEMON_IMG_BASE_URL, POKEMON_TYPE_COLOR } from '~/utils/constants'
 import padNumber from '~/utils/pad-number'
+
+const router = useRouter()
 
 const state = reactive({
 	fetching: false,
@@ -230,6 +272,29 @@ const handleFilterTypeCheckbox = (type: string) => {
 
 const handleFilterApply = () => {
 	filter.types = selectedFilterByType.value
+}
+
+const isCompared = ref<boolean>(false)
+const selectedPokemonComparison = ref<Array<String>>([])
+
+const handleCompareMode = () => {
+	isCompared.value = !isCompared.value
+	selectedPokemonComparison.value = []
+}
+
+const handleCompareCheckbox = (data: string) => {
+	if (selectedPokemonComparison.value.includes(data)) {
+		const index = selectedPokemonComparison.value.indexOf(data)
+		selectedPokemonComparison.value.splice(index, 1)
+	} else {
+		selectedPokemonComparison.value.push(data)
+	}
+}
+
+const handleComparisonSubmit = () => {
+	router.push(
+		`/pokemon-compare/${selectedPokemonComparison.value[0]}/${selectedPokemonComparison.value[1]}`
+	)
 }
 
 onMounted(() => {

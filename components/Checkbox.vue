@@ -5,7 +5,7 @@
 	>
 		<input
 			type="checkbox"
-			class="absolute opacity-0 appearance-none"
+			class="absolute opacity-0"
 			@change="handleCheck($event)"
 		/>
 		<svg
