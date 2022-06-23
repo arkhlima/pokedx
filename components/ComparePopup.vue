@@ -1,11 +1,11 @@
 <template>
 	<div
 		v-if="comparison.length > 0"
-		class="grid fixed inset-x-0 bottom-[16px] z-[999] grid-cols-3 gap-y-6 p-6 m-auto w-1/2 bg-neutral-50 rounded-md shadow-md"
+		class="grid fixed inset-x-0 bottom-[16px] z-[999] grid-cols-3 gap-y-6 p-6 m-auto w-1/2 bg-neutral-50 rounded-md shadow-md comparison"
 	>
-		<div class="flex justify-center items-center">
+		<p class="flex justify-center items-center comparison__first-comparator">
 			{{ comparison[0] }}
-		</div>
+		</p>
 		<div class="flex justify-center items-center">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -22,12 +22,12 @@
 				/>
 			</svg>
 		</div>
-		<div class="flex justify-center items-center">
-			{{ comparison[1] }}
-		</div>
+		<p class="flex justify-center items-center comparison__second-comparator">
+			{{ comparison[1] ?? '???' }}
+		</p>
 		<btn
 			:disabled="comparison.length !== 2"
-			class="col-span-3 justify-center py-3 w-full font-bold text-neutral-50 bg-neutral-900"
+			class="col-span-3 justify-center py-3 w-full font-bold text-neutral-50 bg-neutral-900 comparison__btn"
 			@click="handleClick"
 		>
 			compare!
