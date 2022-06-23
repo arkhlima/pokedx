@@ -1,7 +1,17 @@
 query PokedexFilter($limit: Int, $offset: Int, $types: [String!]) {
   species: pokemon_v2_pokemonspecies(limit: $limit, offset: $offset, order_by: {
       id: asc
-    } where: {  }
+    } where: {
+      pokemon_v2_pokemons: {
+        pokemon_v2_pokemontypes: {
+          pokemon_v2_type: {
+            name: {
+              _in: $types
+            }
+          }
+        }
+      }
+    }
   ) {
     id
     name

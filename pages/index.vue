@@ -136,7 +136,7 @@
 							</svg>
 						</btn>
 					</header>
-					<form class="mt-4">
+					<form class="mt-4" @submit.prevent>
 						<h3 class="font-semibold text-neutral-400">by type:</h3>
 						<fieldset class="flex flex-wrap gap-2 mt-2">
 							<checkbox
@@ -164,6 +164,7 @@
 </template>
 
 <script setup lang="ts">
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { computed, reactive, ref } from 'vue'
 import InfiniteLoading from 'vue-infinite-loading'
 
@@ -192,11 +193,6 @@ const species = ref([] as ComposedPokedex['species'])
 const totalSpecies = ref<number>(0)
 const currentPage = ref<number>(1)
 
-// const filter = reactive({
-// types: Array(),
-// gens: Array(),
-// })
-
 const composeSpecies = (species: Pokedex['species']) => {
 	return species.map((specy: Species) => ({
 		id: padNumber(specy.id),
@@ -216,7 +212,15 @@ const composeSpecies = (species: Pokedex['species']) => {
 const fetchPokedex = async () => {
 	try {
 		state.fetching = true
-		const response = (await GqlPokedex(pagination)) as Pokedex
+
+		const apiCall = isFiltered.value
+			? GqlPokedexFilter({
+					...pagination,
+					types: filterByTypes.value as Array<string>,
+			  })
+			: GqlPokedex(pagination)
+
+		const response = (await apiCall) as Pokedex
 		species.value = composeSpecies(response?.species)
 		totalSpecies.value = response?.species_aggregate?.aggregate?.count
 	} catch (error: any) {
@@ -231,10 +235,19 @@ const handleInfiniteScrollPokedex = async ($state: {
 	complete: () => void
 }) => {
 	if (state.fetching) return
+
 	try {
 		state.fetching = true
 		pagination.offset = currentPage.value * pagination.limit
-		const response = (await GqlPokedex(pagination)) as Pokedex
+
+		const apiCall = isFiltered.value
+			? GqlPokedexFilter({
+					...pagination,
+					types: filterByTypes.value as Array<string>,
+			  })
+			: GqlPokedex(pagination)
+
+		const response = (await apiCall) as Pokedex
 		const composedResponse = composeSpecies(response?.species)
 		totalSpecies.value = response?.species_aggregate?.aggregate?.count
 
@@ -253,26 +266,34 @@ const handleInfiniteScrollPokedex = async ($state: {
 	}
 }
 
-const selectedFilterByType = ref<Array<String>>([])
+const selectedFilterByTypes = ref<Array<String>>([])
 const isFilterModalShown = ref<boolean>(false)
+const filterByTypes = ref<Array<String>>([])
 
 const handleFilterModalVisibility = () => {
 	isFilterModalShown.value = !isFilterModalShown.value
-	selectedFilterByType.value = []
+	selectedFilterByTypes.value = []
 }
 
 const handleFilterTypeCheckbox = (type: string) => {
-	if (selectedFilterByType.value.includes(type)) {
-		const index = selectedFilterByType.value.indexOf(type)
-		selectedFilterByType.value.splice(index, 1)
+	if (selectedFilterByTypes.value.includes(type)) {
+		const index = selectedFilterByTypes.value.indexOf(type)
+		selectedFilterByTypes.value.splice(index, 1)
 	} else {
-		selectedFilterByType.value.push(type)
+		selectedFilterByTypes.value.push(type)
 	}
 }
 
 const handleFilterApply = () => {
-	filter.types = selectedFilterByType.value
+	filterByTypes.value = selectedFilterByTypes.value
+	pagination.offset = 0
+	handleFilterModalVisibility()
+	fetchPokedex()
 }
+
+const isFiltered = computed(() => {
+	return filterByTypes.value.length > 0
+})
 
 const isCompared = ref<boolean>(false)
 const selectedPokemonComparison = ref<Array<String>>([])
