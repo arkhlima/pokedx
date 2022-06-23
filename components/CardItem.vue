@@ -45,7 +45,7 @@
 		<div class="flex z-[3] justify-center items-center p-2 card__content">
 			<h2 class="text-lg font-semibold text-center card__label">
 				<nuxt-link
-					:to="`/${card.name}`"
+					:to="`/pokemon/${card.name}`"
 					class="focus:border-b-[3px] focus:border-b-gray-300 focus:outline-none card__link"
 				>
 					{{ card.name }}
@@ -73,7 +73,8 @@ const mouseDown = ref()
 
 const handleCardMouseUp = () => {
 	mouseUp.value = +new Date()
-	if (mouseUp.value - mouseDown.value < 200) router.push(`/${props.card.name}`)
+	if (mouseUp.value - mouseDown.value < 200)
+		router.push(`/pokemon/${props.card.name}`)
 }
 
 const handleCardMouseDown = () => {

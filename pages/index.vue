@@ -136,7 +136,6 @@ import {
 } from '~/models/interfaces'
 import { POKEMON_IMG_BASE_URL, POKEMON_TYPE_COLOR } from '~/utils/constants'
 import padNumber from '~/utils/pad-number'
-import { PokedexQuery } from '~~/.nuxt/gql-sdk'
 
 const state = reactive({
 	fetching: false,
