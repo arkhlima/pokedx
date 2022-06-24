@@ -62,7 +62,7 @@
 					loading="lazy"
 					width="140"
 					height="140"
-					class="object-contain w-[140px] h-[140px] grayscale-[25%] transition-all card__img"
+					class="object-contain w-[140px] h-[140px] transition-all card__img"
 				/>
 			</figure>
 			<!-- /card-figure -->
@@ -129,7 +129,7 @@ const handleCardMouseDown = () => {
 		}
 		.card__img {
 			transform: scale(1.1);
-			filter: grayscale(0) drop-shadow(0 0 5px rgb(18 18 18 / 20%));
+			filter: drop-shadow(0 0 5px rgb(18 18 18 / 20%));
 		}
 	}
 }
