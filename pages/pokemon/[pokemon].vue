@@ -112,7 +112,7 @@
 					<!-- poke-stats -->
 					<div class="w-full">
 						<h2 class="pb-4 text-xl font-bold text-neutral-400">stats</h2>
-						<ul class="flex flex-col gap-y-4 mt-4 w-full">
+						<ul class="flex flex-col gap-y-4 w-full">
 							<li v-for="(pokemonStat, i) of pokemonStats" :key="i">
 								<div>
 									<div class="flex justify-between text-sm">
@@ -136,6 +136,40 @@
 					</div>
 					<!-- /poke-stats -->
 
+					<hr
+						class="block my-8 w-full h-[1px] border-t-0 border-b border-b-neutral-[400]"
+					/>
+
+					<!-- poke-evo -->
+					<div class="w-full">
+						<h2 class="pb-4 text-xl font-bold text-neutral-400">evolucions</h2>
+						<ul class="flex overflow-x-auto gap-x-4 w-full">
+							<li
+								v-for="(pokemonEvo, i) of pokemonEvolutions"
+								:key="i"
+								class="flex flex-col justify-center items-center min-w-[180px]"
+							>
+								<!-- poke-figure -->
+								<figure
+									class="flex relative justify-center items-center w-full h-[140px] poke__figure"
+								>
+									<img
+										:src="getPokemonImg(pokemonEvo.id)"
+										:alt="pokemonEvo.name"
+										width="140"
+										height="140"
+										class="object-contain w-[140px] h-[140px] transition-all poke__img"
+									/>
+								</figure>
+								<!-- /poke-figure -->
+								<h3 class="py-2 mt-4 text-lg font-bold text-center poke__name">
+									{{ pokemonEvo.name }}
+								</h3>
+							</li>
+						</ul>
+					</div>
+					<!-- /poke-evo -->
+
 					<div
 						:class="getPokemonTypeColorClass(pokemonTypes[0]?.type?.name)"
 						class="absolute top-[-75px] z-[1] w-[150%] h-[250px] rounded-[100%] opacity-25"
@@ -148,6 +182,7 @@
 </template>
 
 <script setup lang="ts">
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { computed, reactive, ref } from 'vue'
 
 import { PokemonDetail, Pokemon } from '~/models/interfaces'
@@ -191,11 +226,11 @@ const pokemonWeight = computed(() => {
 const pokemonHeight = computed(() => {
 	return `${response.value[0]?.pokemon[0]?.height * 10}cm`
 })
-// const pokemonEvolutions = computed(() => {
-// 	return response.value[0]?.evolutions?.species
-// })
+const pokemonEvolutions = computed(() => {
+	return response.value[0]?.evolutions?.species
+})
 const pokemonImg = computed(() => {
-	return `${POKEMON_IMG_BASE_URL}${pokemonId.value}.png`
+	return getPokemonImg(pokemonId.value)
 })
 
 const fetchPokemon = async () => {
@@ -212,6 +247,9 @@ const fetchPokemon = async () => {
 	}
 }
 
+const getPokemonImg = (id: number) => {
+	return `${POKEMON_IMG_BASE_URL}${id}.png`
+}
 const getPokemonTypeColorClass = (name: string) => {
 	return POKEMON_TYPE_COLOR[name]
 }

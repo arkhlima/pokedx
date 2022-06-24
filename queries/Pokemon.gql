@@ -25,10 +25,11 @@ query Pokemon($name: String) {
     description: pokemon_v2_pokemonspeciesflavortexts(limit: 1) {
       text: flavor_text
     }
-    # evolutions: pokemon_v2_evolutionchain {
-    #   species: pokemon_v2_pokemonspecies {
-    #     name
-    #   }
-    # }
+    evolutions: pokemon_v2_evolutionchain {
+      species: pokemon_v2_pokemonspecies {
+        id
+        name
+      }
+    }
   }
 }
