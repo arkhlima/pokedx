@@ -25,7 +25,7 @@
 			</svg>
 		</label>
 		<div
-			class="flex relative flex-col bg-neutral-50 rounded-md shadow-md transition-all cursor-pointer card__content"
+			class="flex relative flex-col bg-neutral-50 rounded-md border-[3px] border-[#f8f8f8] shadow-md transition-all cursor-pointer card__content"
 			@mouseup="handleCardMouseUp"
 			@mousedown="handleCardMouseDown"
 		>
@@ -123,6 +123,9 @@ const handleCardMouseDown = () => {
 	&:hover {
 		.card__content {
 			transform: scale(1.05);
+			border-color: transparent;
+			background: linear-gradient(#f8f8f8, #f8f8f8) padding-box,
+				linear-gradient(135deg, #f8f8f8, #f8f8f8, #1d4ed8, #c026d3) border-box;
 		}
 		.card__img {
 			transform: scale(1.1);
